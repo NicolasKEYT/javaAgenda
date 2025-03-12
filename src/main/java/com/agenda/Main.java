@@ -21,5 +21,6 @@ public class Main {
 
         Ihm ihm = new Ihm(gerenciador);
         ihm.dialogar();
+        scanner.close();
     }
 }

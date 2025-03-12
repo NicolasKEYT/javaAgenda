@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorNomesBD implements GerenciadorNomes {
-    private final String url = "jdbc:postgresql://<SEU-HOST>.supabase.co:5432/<SEU-BANCO>";
-    private final String user = "<SEU-USUARIO>";
-    private final String password = "<SUA-SENHA>";
+    // Configuração do Supabase
+    private final String url = "jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:5432/postgres";
+    private final String user = "postgres.lliumudycpujcapbzuls";
+    private final String password = "Nick@db2305";
 
     public GerenciadorNomesBD() {
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement()) {
+            // Criar a tabela se ela não existir
             String sql = "CREATE TABLE IF NOT EXISTS nomes (id SERIAL PRIMARY KEY, nome VARCHAR(20) NOT NULL)";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -42,8 +44,10 @@ public class GerenciadorNomesBD implements GerenciadorNomes {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, nome);
             pstmt.executeUpdate();
+            System.out.println("Nome adicionado com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao adicionar nome: " + e.getMessage());
         }
     }
 }
+
