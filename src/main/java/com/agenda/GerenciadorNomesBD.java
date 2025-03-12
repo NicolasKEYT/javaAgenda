@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorNomesBD implements GerenciadorNomes {
-    // Configuração do Supabase
     private final String url = "jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:5432/postgres";
     private final String user = "postgres.lliumudycpujcapbzuls";
     private final String password = "Nick@db2305";
@@ -13,7 +12,6 @@ public class GerenciadorNomesBD implements GerenciadorNomes {
     public GerenciadorNomesBD() {
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement()) {
-            // Criar a tabela se ela não existir
             String sql = "CREATE TABLE IF NOT EXISTS nomes (id SERIAL PRIMARY KEY, nome VARCHAR(20) NOT NULL)";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
